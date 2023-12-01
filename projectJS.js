@@ -1,3 +1,21 @@
+// Event listner , wait for dom to be fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+
+    //Get button by  ID 
+    var generateButton = document.getElementById('generateButton');
+
+    //  reset button to clear the form & print button 
+    var resetButton = document.getElementById('resetButton');
+    var printButton = document.getElementById('printButton');
+
+    // Added an eventlistner  to the generate, reset and print button
+    generateButton.addEventListener('click', generateMealPlan);
+    resetButton.addEventListener('click', resetPlanner);
+    printButton.addEventListener('click', printPlanner);
+
+
+
+});
 function generateMealPlan() {
     // Get user input from the form
     var name = document.getElementById('name').value;
@@ -41,6 +59,11 @@ newPageContent += `
 `;
 
 document.body.innerHTML = newPageContent;
+
+// Added eventListner for the page
+document.getElementById('clearButton').addEventListener('click', resetPlanner);
+document.getElementById('printButton').addEventListener('click', printPlanner);
+
 }
 
 function getMeals(day) {
@@ -53,14 +76,23 @@ meals.push(meal);
 return meals;
 }
 
-function clearPlanner() {
+function resetPlanner() {
 // Implement logic to clear the planner (reset form fields, etc.)
+document.getElementById('name').value = '';
+document.getElementById('email').value = '';
+document.getElementById('goal').value = '';
+
+// Reset meal input fields
+var daysOfWeek = ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+daysOfWeek.forEach(function (day) {
+    for (var i = 1; i <= 5; i++) {
+        document.getElementById(day + 'Meal' + i).value = '';
+    }
+})
 }
 
 function printPlanner() {
-// Implement logic to print or download the planner
-// You may want to use window.print() for printing
-// For downloading, you can create a downloadable file or open a new window/  
+window.print();  
 
     
 }

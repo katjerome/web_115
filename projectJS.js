@@ -1,5 +1,5 @@
 // Event listner , wait for dom to be fully loaded
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener(function () {
 
     //Get button by  ID 
     var generateButton = document.getElementById('generateButton');

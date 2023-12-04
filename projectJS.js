@@ -92,7 +92,66 @@ daysOfWeek.forEach(function (day) {
 }
 
 function printPlanner() {
-window.print();  
+window.print();
+// logic for the print and download
+var name =  document.getElementById('name').value;
+var email = document.getElementById('email').value;
+var goal = document.getElementById('goal').value;
 
+var daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+var mealPlan = {};
+daysOfWeek.forEach(function (day) {
+    mealPlan[day] = getMeals(day);
+
+});
+
+var plannerContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Meal Plan</title>
+        </head>
+        <body>
+            <h1>Meal Plan for the Week</h1>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Goal for the Week:</strong> ${goal}</p>
+    `;
+
+    daysOfWeek.forEach(function (day) {
+        plannerContent += `<h2>${day}</h2><ul>`;
+        mealPlan[day].forEach(function (meal) {
+            plannerContent += `<li>${meal}</li>`;
+        });
+        plannerContent += '</ul>';
+    });
+
+    plannerContent += `
+        <button id="clearButton">Clear Planner</button>
+        <button id="printButton">Print/Download Planner</button>
+        </body>
+        </html>
+    `;
+
+    // Create a Blob with the planner content
+    var blob = new Blob([plannerContent], { type: 'text/html' });
+
+    // Create a temporary URL for the Blob
+    var plannerURL = URL.createObjectURL(blob);
+
+    // Create a link element for downloading
+    var downloadLink = document.createElement('a');
+    downloadLink.href = plannerURL;
+    downloadLink.download = 'meal_plan.html';
+
+    // Append the link to the document and trigger a click
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    // Clean up: remove the link and revoke the URL
+    document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(plannerURL);
     
 }

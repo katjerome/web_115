@@ -1,22 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, intial-scale=1.0">
-        <title>WEB-115 Final Project</title>
-        <link rel="stylesheet" href="styles.css" >
-        
-    </head>
-    <body>
-        <header>
-            <h1>Perfectly Portioned Fitness</h1>
-            <p>Build Your Meal Plan</p>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB-115 Final Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Kayatha Jerome WEB-115  0006 </h1>
+        <p>Build Your Meal Plan</p>
+    </header>
 
-        <form id="mealPlanForm">
-            <!-- Your form elements will go here-->
-            <button type="button" onclick="generateMealPlan()">Generate Meal Plan</button>
-        </form>
-        <script src="projectJS.js"></script>
-    </body>
+    <form id="mealPlanForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="goal">Goal for the Week:</label>
+        <textarea id="goal" name="goal" rows="4" required></textarea>
+
+        <!-- Repeat for each day of the week -->
+        <fieldset>
+            <legend>Monday Meals</legend>
+        
+            <!-- Breakfast -->
+            <label for="MondayMeal1">Breakfast:</label>
+            <input type="text" id="MondayMeal1" name="MondayMeal1">
+        
+            <!-- Snack -->
+            <label for="MondayMeal2">Snack:</label>
+            <input type="text" id="MondayMeal2" name="MondayMeal2">
+        
+            <!-- Lunch -->
+            <label for="MondayMeal3">Lunch:</label>
+            <input type="text" id="MondayMeal3" name="MondayMeal3">
+        
+            <!-- Afternoon Snack -->
+            <label for="MondayMeal4">Afternoon Snack:</label>
+            <input type="text" id="MondayMeal4" name="MondayMeal4">
+        
+            <!-- Dinner -->
+            <label for="MondayMeal5">Dinner:</label>
+            <input type="text" id="MondayMeal5" name="MondayMeal5">
+        </fieldset>  
+        
+        <fieldset>
+            <legend>Tuesday Meals</legend>
+        
+            <!-- Breakfast -->
+            <label for="TuesdayMeal1">Breakfast:</label>
+            <input type="text" id="TuesdayMeal1" name="TuesdayMeal1">
+        
+            <!-- Snack -->
+            <label for="TuesdayMeal2">Snack:</label>
+            <input type="text" id="TuesdayMeal2" name="TuesdayMeal2">
+        
+            <!-- Lunch -->
+            <label for="TuesdayMeal3">Lunch:</label>
+            <input type="text" id="TuesdayMeal3" name="TuesdayMeal3">
+        
+            <!-- Afternoon Snack -->
+            <label for="TuesdayMeal4">Afternoon Snack:</label>
+            <input type="text" id="TuesdayMeal4" name="TuesdayMeal4">
+        
+            <!-- Dinner -->
+            <label for="TuesdayMeal5">Dinner:</label>
+            <input type="text" id="TuesdayMeal5" name="TuesdayMeal5">
+        </fieldset>
+        
+        <fieldset>
+            <legend>Wednesday Meals</legend>
+        
+            <!-- Breakfast -->
+            <label for="WednesdayMeal1">Breakfast:</label>
+            <input type="text" id="WednesdayMeal1" name="WednesdayMeal1">
+        
+            <!-- Snack -->
+            <label for="WednesdayMeal2">Snack:</label>
+            <input type="text" id="WednesdayMeal2" name="WednesdayMeal2">
+        
+            <!-- Lunch -->
+            <label for="WednesdayMeal3">Lunch:</label>
+            <input type="text" id="WednesdayMeal3" name="WednesdayMeal3">
+        
+            <!-- Afternoon Snack -->
+            <label for="WednesdayMeal4">Afternoon Snack:</label>
+            <input type="text" id="WednesdayMeal4" name="WednesdayMeal4">
+        
+            <!-- Dinner -->
+            <label for="WednesdayMeal5">Dinner:</label>
+            <input type="text" id="WednesdayMeal5" name="WednesdayMeal5">
+        </fieldset>
+        
+        <fieldset>
+            <legend>Thursday Meals</legend>
+        
+            <!-- Breakfast -->
+            <label for="ThursdayMeal1">Breakfast:</label>
+            <input type="text" id="ThursdayMeal1" name="MondayMeal1">
+        
+            <!-- Snack -->
+            <label for="ThursdayMeal2">Snack:</label>
+            <input type="text" id="ThursdayMeal2" name="ThursdayMeal2">
+        
+            <!-- Lunch -->
+            <label for="ThursdayMeal3">Lunch:</label>
+            <input type="text" id="ThursdayMeal3" name="ThursdayMeal3">
+        
+            <!-- Afternoon Snack -->
+            <label for="ThursdayMeal4">Afternoon Snack:</label>
+            <input type="text" id="ThursdayMeal4" name="ThursdayMeal4">
+        
+            <!-- Dinner -->
+            <label for="ThursdayMeal5">Dinner:</label>
+            <input type="text" id="ThursdayMeal5" name="ThursdayMeal5">
+        </fieldset>
+        
+        <fieldset>
+            <legend>Friday Meals</legend>
+        
+            <!-- Breakfast -->
+            <label for="FridayMeal1">Breakfast:</label>
+            <input type="text" id="FridayMeal1" name="FridayMeal1">
+        
+            <!-- Snack -->
+            <label for="FridayMeal2">Snack:</label>
+            <input type="text" id="FridayMeal2" name="FridayMeal2">
+        
+            <!-- Lunch -->
+            <label for="FridayMeal3">Lunch:</label>
+            <input type="text" id="FridayMeal3" name="FridayMeal3">
+        
+            <!-- Afternoon Snack -->
+            <label for="FridayMeal4">Afternoon Snack:</label>
+            <input type="text" id="FridayMeal4" name="FridayMeal4">
+        
+            <!-- Dinner -->
+            <label for="FridayMeal5">Dinner:</label>
+            <input type="text" id="FridayMeal5" name="FridayMeal5">
+        </fieldset>
+
+        <fieldset>
+            <legend>Saturday Meals</legend>
+        
+            <!-- Breakfast -->
+            <label for="SaturdayMeal1">Breakfast:</label>
+            <input type="text" id="SaturdayMeal1" name="SaturdayMeal1">
+        
+            <!-- Snack -->
+            <label for="SaturdayMeal2">Snack:</label>
+            <input type="text" id="SaturdayMeal2" name="SaturdayMeal2">
+        
+            <!-- Lunch -->
+            <label for="SaturdayMeal3">Lunch:</label>
+            <input type="text" id="SaturdayMeal3" name="SaturdayMeal3">
+        
+            <!-- Afternoon Snack -->
+            <label for="SaturdayMeal4">Afternoon Snack:</label>
+            <input type="text" id="SaturdayMeal4" name="SaturdayMeal4">
+        
+            <!-- Dinner -->
+            <label for="SaturdayMeal5">Dinner:</label>
+            <input type="text" id="SaturdayMeal5" name="SaturdayMeal5">
+        </fieldset>
+
+        <fieldset>
+            <legend>Sunday Meals</legend>
+        
+            <!-- Breakfast -->
+            <label for="SundayMeal1">Breakfast:</label>
+            <input type="text" id="SundayMeal1" name="SundayMeal1">
+        
+            <!-- Snack -->
+            <label for="SundayMeal2">Snack:</label>
+            <input type="text" id="SundayMeal2" name="SundayMeal2">
+        
+            <!-- Lunch -->
+            <label for="SundayMeal3">Lunch:</label>
+            <input type="text" id="SundayMeal3" name="SundayMeal3">
+        
+            <!-- Afternoon Snack -->
+            <label for="SundayMeal4">Afternoon Snack:</label>
+            <input type="text" id="SundayMeal4" name="SundayMeal4">
+        
+            <!-- Dinner -->
+            <label for="SundayMeal5">Dinner:</label>
+            <input type="text" id="SundayMeal5" name="SundayMeal5">
+        </fieldset>
+        
+        
+        <button type="button" id="generateButton">Generate Meal Plan</button>
+        <button type="button" id="resetButton">Clear Planner</button>
+        <button type="button" id="printButton">Print/Download Planner</button>
+    </form>
+
+    <script src="projectJS.js"></script>
+</body>
 </html>

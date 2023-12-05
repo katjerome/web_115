@@ -1,124 +1,127 @@
-// Event listner , wait for dom to be fully loaded
-document.addEventListener(function () {
-
-    //Get button by  ID 
+document.addEventListener('DOMContentLoaded', function () {
+    // Get buttons by ID
     var generateButton = document.getElementById('generateButton');
-
-    //  reset button to clear the form & print button 
     var resetButton = document.getElementById('resetButton');
     var printButton = document.getElementById('printButton');
 
-    // Added an eventlistner  to the generate, reset and print button
+    // Add event listeners to the buttons
     generateButton.addEventListener('click', generateMealPlan);
     resetButton.addEventListener('click', resetPlanner);
-    printButton.addEventListener('click', printPlanner);
-
-
-
+    printButton.addEventListener('click', downloadPlanner);
 });
+
+function isValidEmail(email) {
+    // Simple regex for basic email validation
+    return /\S+@\S+\.\S+/.test(email);
+}
+
 function generateMealPlan() {
-    // Get user input from the form
-    var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
+    if (!isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    var name = document.getElementById('name').value;
     var goal = document.getElementById('goal').value;
 
-    // Get meal inputs for each day
-    var daysOfWeek = ['Monday', 'Tuesday', ' Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    // Implement the getMeals function to gather meal data
+    var daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     var mealPlan = {};
-    daysOfWeek,forEach(function (day) {
+    daysOfWeek.forEach(function (day) {
         mealPlan[day] = getMeals(day);
     });
 
-    // Creat a new page with the meal plan
-    var newPageContent = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meal Plan</title>
-</head>
-<body>
-    <h1>Meal Plan for the Week</h1>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Goal for the Week:</strong> ${goal}</p>
-`;
-daysOfWeek.forEach(function (day) {
-    newPageContent += `<h2>${day}</h2><ul>`;
-    mealPlan[day].forEach(function (meal) {
-        newPageContent += `<li>${meal}</li>`;
-    });
-    newPageContent += '</ul>';
-});
-newPageContent += `
-<button onclick="clearPlanner()">Clear Planner</button>
-<button onclick="printPlanner()">Print/Download Planner</button>
-</body>
-</html>
-`;
-
-document.body.innerHTML = newPageContent;
-
-// Added eventListner for the page
-document.getElementById('clearButton').addEventListener('click', resetPlanner);
-document.getElementById('printButton').addEventListener('click', printPlanner);
-
-}
-
-function getMeals(day) {
-// Implement logic to retrieve meal inputs for the specified day
-var meals = [];
-for (var i = 1; i <= 5; i++) {
-var meal = document.getElementById(day + 'Meal' + i).value;
-meals.push(meal);
-}
-return meals;
-}
-
-function resetPlanner() {
-// Implement logic to clear the planner (reset form fields, etc.)
-document.getElementById('name').value = '';
-document.getElementById('email').value = '';
-document.getElementById('goal').value = '';
-
-// Reset meal input fields
-var daysOfWeek = ['Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-daysOfWeek.forEach(function (day) {
-    for (var i = 1; i <= 5; i++) {
-        document.getElementById(day + 'Meal' + i).value = '';
-    }
-})
-}
-
-function printPlanner() {
-window.print();
-// logic for the print and download
-var name =  document.getElementById('name').value;
-var email = document.getElementById('email').value;
-var goal = document.getElementById('goal').value;
-
-var daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-var mealPlan = {};
-daysOfWeek.forEach(function (day) {
-    mealPlan[day] = getMeals(day);
-
-});
-
-var plannerContent = `
+    // Use document.write() to create a new page
+    document.write(`
         <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Meal Plan</title>
+            <style>
+                body { font-family: monospace; /* Other styling as needed */ }
+                .banner { /* Styling for the banner */ }
+            </style>
         </head>
         <body>
-            <h1>Meal Plan for the Week</h1>
-            <p><strong>Name:</strong> ${name}</p>
+            <div class="banner">
+                <h1>Build Your Meal Plan</h1>
+                <p>Your Name, WEB-115 Section</p>
+            </div>
+            <h2>Meal Plan for ${name}</h2>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Goal for the Week:</strong> ${goal}</p>
-    `;
+            ${generateMealPlanContent(mealPlan)}
+            <button onclick="window.print();">Print Planner</button>
+        </body>
+        </html>
+    `);
+}
+
+function getMeals(day) {
+    var meals = [];
+    for (var i = 1; i <= 5; i++) {
+        var mealInput = document.getElementById(day + 'Meal' + i);
+        if (mealInput && mealInput.value) {
+            meals.push(mealInput.value);
+        }
+    }
+    return meals;
+}
+
+function generateMealPlanContent(mealPlan) {
+    var content = '';
+    for (var day in mealPlan) {
+        content += `<h3>${day}</h3><ul>`;
+        mealPlan[day].forEach(function (meal) {
+            content += `<li>${meal}</li>`;
+        });
+        content += '</ul>';
+    }
+    return content;
+}
+
+function resetPlanner() {
+    // Implement logic to clear the planner (reset form fields, etc.)
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('goal').value = '';
+
+    // Reset meal input fields
+    var daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    daysOfWeek.forEach(function (day) {
+        for (var i = 1; i <= 5; i++) {
+            document.getElementById(day + 'Meal' + i).value = '';
+        }
+    });
+}
+
+function downloadPlanner() {
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var goal = document.getElementById('goal').value;
+
+    var daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    var mealPlan = {};
+
+    daysOfWeek.forEach(function (day) {
+        mealPlan[day] = getMeals(day);
+    });
+
+    var plannerContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Meal Plan</title>
+            </head>
+                <h1 style="background-color: rgb(32,178,170); padding: 10px;"> Weekly Meal Plan</h1>
+            <body>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Goal for the Week:</strong> ${goal}</p>`;
 
     daysOfWeek.forEach(function (day) {
         plannerContent += `<h2>${day}</h2><ul>`;
@@ -130,10 +133,9 @@ var plannerContent = `
 
     plannerContent += `
         <button id="clearButton">Clear Planner</button>
-        <button id="printButton">Print/Download Planner</button>
+        <button id="downloadButton">Print/Download Planner</button>
         </body>
-        </html>
-    `;
+        </html>`;
 
     // Create a Blob with the planner content
     var blob = new Blob([plannerContent], { type: 'text/html' });
@@ -152,6 +154,5 @@ var plannerContent = `
 
     // Clean up: remove the link and revoke the URL
     document.body.removeChild(downloadLink);
-    URL.revokeObjectURL(plannerURL);
-    
+    URL.revokeObjectURL(plannerURL)
 }

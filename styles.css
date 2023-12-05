@@ -3,7 +3,7 @@
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     
-    background-image: url("kitchen.jpg");
+    background-color: lightseagreen;opacity:0.6;
 }
 
 header {
@@ -12,12 +12,17 @@ header {
     text-align: center;
 }
 
+header{
+    background-image: url(Foodmenu.jpg);
+    background-position: top center, middle;
+    background-repeat: no-repeat, repeat;
+}
 form {
     margin: 20px;
 }
 
 button {
-    background-color: #4caf50;
+    background-color: blue;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -25,4 +30,5 @@ button {
     cursor: pointer;
 }
 
-@import "stylez.css";
+
+
